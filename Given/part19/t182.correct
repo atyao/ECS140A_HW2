@@ -1,0 +1,35 @@
+running e2c t182
+a
+  declared on line 1 at nesting depth 0
+  assigned to on: 3 6
+  never used
+b
+  declared on line 1 at nesting depth 0
+  assigned to on: 4
+  used on: 6
+c
+  declared on line 1 at nesting depth 0
+  assigned to on: 7
+  never used
+compiling the C generated code
+executing the a.out
++++ dump on line 2 of all levels begin +++
+      -12345   1   0 a
+      -12345   1   0 b
+      -12345   1   0 c
+--- dump on line 2 of all levels end ---
++++ dump on line 5 of all levels begin +++
+          10   1   0 a
+          20   1   0 b
+      -12345   1   0 c
+--- dump on line 5 of all levels end ---
++++ dump on line 8 of all levels begin +++
+          20   1   0 a
+          20   1   0 b
+          44   1   0 c
+--- dump on line 8 of all levels end ---
++++ dump on line 9 of all levels begin +++
+          20   1   0 a
+          20   1   0 b
+          44   1   0 c
+--- dump on line 9 of all levels end ---

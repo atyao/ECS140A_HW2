@@ -1,0 +1,525 @@
+running e2c t203
+k
+  declared on line 1 at nesting depth 0
+  assigned to on: 5
+  used on: 7 8 11 15 19
+sume
+  declared on line 1 at nesting depth 0
+  assigned to on: 3 8
+  used on: 8
+sumo
+  declared on line 1 at nesting depth 0
+  assigned to on: 4 11
+  used on: 11
+compiling the C generated code
+executing the a.out
++++ dump on line 16 of all levels begin +++
+          10   1   0 k
+          30   1   0 sume
+          25   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+          20   1   0 k
+         110   1   0 sume
+         100   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+          30   1   0 k
+         240   1   0 sume
+         225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+          40   1   0 k
+         420   1   0 sume
+         400   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+          50   1   0 k
+         650   1   0 sume
+         625   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+          60   1   0 k
+         930   1   0 sume
+         900   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+          70   1   0 k
+        1260   1   0 sume
+        1225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+          80   1   0 k
+        1640   1   0 sume
+        1600   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+          90   1   0 k
+        2070   1   0 sume
+        2025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         100   1   0 k
+        2550   1   0 sume
+        2500   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         110   1   0 k
+        3080   1   0 sume
+        3025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         120   1   0 k
+        3660   1   0 sume
+        3600   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         130   1   0 k
+        4290   1   0 sume
+        4225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         140   1   0 k
+        4970   1   0 sume
+        4900   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         150   1   0 k
+        5700   1   0 sume
+        5625   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         160   1   0 k
+        6480   1   0 sume
+        6400   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         170   1   0 k
+        7310   1   0 sume
+        7225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         180   1   0 k
+        8190   1   0 sume
+        8100   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         190   1   0 k
+        9120   1   0 sume
+        9025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         200   1   0 k
+       10100   1   0 sume
+       10000   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         210   1   0 k
+       11130   1   0 sume
+       11025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         220   1   0 k
+       12210   1   0 sume
+       12100   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         230   1   0 k
+       13340   1   0 sume
+       13225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         240   1   0 k
+       14520   1   0 sume
+       14400   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         250   1   0 k
+       15750   1   0 sume
+       15625   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         260   1   0 k
+       17030   1   0 sume
+       16900   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         270   1   0 k
+       18360   1   0 sume
+       18225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         280   1   0 k
+       19740   1   0 sume
+       19600   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         290   1   0 k
+       21170   1   0 sume
+       21025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         300   1   0 k
+       22650   1   0 sume
+       22500   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         310   1   0 k
+       24180   1   0 sume
+       24025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         320   1   0 k
+       25760   1   0 sume
+       25600   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         330   1   0 k
+       27390   1   0 sume
+       27225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         340   1   0 k
+       29070   1   0 sume
+       28900   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         350   1   0 k
+       30800   1   0 sume
+       30625   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         360   1   0 k
+       32580   1   0 sume
+       32400   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         370   1   0 k
+       34410   1   0 sume
+       34225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         380   1   0 k
+       36290   1   0 sume
+       36100   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         390   1   0 k
+       38220   1   0 sume
+       38025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         400   1   0 k
+       40200   1   0 sume
+       40000   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         410   1   0 k
+       42230   1   0 sume
+       42025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         420   1   0 k
+       44310   1   0 sume
+       44100   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         430   1   0 k
+       46440   1   0 sume
+       46225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         440   1   0 k
+       48620   1   0 sume
+       48400   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         450   1   0 k
+       50850   1   0 sume
+       50625   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         460   1   0 k
+       53130   1   0 sume
+       52900   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         470   1   0 k
+       55460   1   0 sume
+       55225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         480   1   0 k
+       57840   1   0 sume
+       57600   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         490   1   0 k
+       60270   1   0 sume
+       60025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         500   1   0 k
+       62750   1   0 sume
+       62500   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         510   1   0 k
+       65280   1   0 sume
+       65025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         520   1   0 k
+       67860   1   0 sume
+       67600   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         530   1   0 k
+       70490   1   0 sume
+       70225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         540   1   0 k
+       73170   1   0 sume
+       72900   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         550   1   0 k
+       75900   1   0 sume
+       75625   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         560   1   0 k
+       78680   1   0 sume
+       78400   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         570   1   0 k
+       81510   1   0 sume
+       81225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         580   1   0 k
+       84390   1   0 sume
+       84100   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         590   1   0 k
+       87320   1   0 sume
+       87025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         600   1   0 k
+       90300   1   0 sume
+       90000   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         610   1   0 k
+       93330   1   0 sume
+       93025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         620   1   0 k
+       96410   1   0 sume
+       96100   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         630   1   0 k
+       99540   1   0 sume
+       99225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         640   1   0 k
+      102720   1   0 sume
+      102400   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         650   1   0 k
+      105950   1   0 sume
+      105625   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         660   1   0 k
+      109230   1   0 sume
+      108900   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         670   1   0 k
+      112560   1   0 sume
+      112225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         680   1   0 k
+      115940   1   0 sume
+      115600   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         690   1   0 k
+      119370   1   0 sume
+      119025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         700   1   0 k
+      122850   1   0 sume
+      122500   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         710   1   0 k
+      126380   1   0 sume
+      126025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         720   1   0 k
+      129960   1   0 sume
+      129600   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         730   1   0 k
+      133590   1   0 sume
+      133225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         740   1   0 k
+      137270   1   0 sume
+      136900   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         750   1   0 k
+      141000   1   0 sume
+      140625   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         760   1   0 k
+      144780   1   0 sume
+      144400   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         770   1   0 k
+      148610   1   0 sume
+      148225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         780   1   0 k
+      152490   1   0 sume
+      152100   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         790   1   0 k
+      156420   1   0 sume
+      156025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         800   1   0 k
+      160400   1   0 sume
+      160000   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         810   1   0 k
+      164430   1   0 sume
+      164025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         820   1   0 k
+      168510   1   0 sume
+      168100   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         830   1   0 k
+      172640   1   0 sume
+      172225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         840   1   0 k
+      176820   1   0 sume
+      176400   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         850   1   0 k
+      181050   1   0 sume
+      180625   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         860   1   0 k
+      185330   1   0 sume
+      184900   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         870   1   0 k
+      189660   1   0 sume
+      189225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         880   1   0 k
+      194040   1   0 sume
+      193600   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         890   1   0 k
+      198470   1   0 sume
+      198025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         900   1   0 k
+      202950   1   0 sume
+      202500   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         910   1   0 k
+      207480   1   0 sume
+      207025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         920   1   0 k
+      212060   1   0 sume
+      211600   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         930   1   0 k
+      216690   1   0 sume
+      216225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         940   1   0 k
+      221370   1   0 sume
+      220900   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         950   1   0 k
+      226100   1   0 sume
+      225625   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         960   1   0 k
+      230880   1   0 sume
+      230400   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         970   1   0 k
+      235710   1   0 sume
+      235225   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         980   1   0 k
+      240590   1   0 sume
+      240100   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+         990   1   0 k
+      245520   1   0 sume
+      245025   1   0 sumo
+--- dump on line 16 of all levels end ---
++++ dump on line 16 of all levels begin +++
+        1000   1   0 k
+      250500   1   0 sume
+      250000   1   0 sumo
+--- dump on line 16 of all levels end ---
+---- Execution Counts ----
+ num    count
+   1        1
+   2     1000
+   3      500
+   4      500
+   5     1000
+   6      100
+   7        0
+   8        1

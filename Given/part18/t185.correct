@@ -1,0 +1,321 @@
+running e2c t185
+repeat
+  declared on line 1 at nesting depth 0
+  assigned to on: 5
+  never used
+bigSum
+  declared on line 1 at nesting depth 0
+  assigned to on: 3 21
+  used on: 21
+k
+  declared on line 7 at nesting depth 1
+  assigned to on: 11
+  used on: 12
+g
+  declared on line 7 at nesting depth 1
+  assigned to on: 16
+  used on: 17
+sum
+  declared on line 7 at nesting depth 1
+  assigned to on: 9 12 17
+  used on: 12 17 21
+compiling the C generated code
+executing the a.out
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+      -12345   7   1 k
+      -12345   7   1 g
+           0   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           1   7   1 k
+      -12345   7   1 g
+           1   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           2   7   1 k
+      -12345   7   1 g
+           3   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           3   7   1 k
+      -12345   7   1 g
+           6   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           4   7   1 k
+      -12345   7   1 g
+          10   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           5   7   1 k
+      -12345   7   1 g
+          15   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           6   7   1 k
+      -12345   7   1 g
+          21   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           7   7   1 k
+      -12345   7   1 g
+          28   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           8   7   1 k
+      -12345   7   1 g
+          36   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           9   7   1 k
+      -12345   7   1 g
+          45   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+          10   7   1 k
+      -12345   7   1 g
+          55   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+          11   7   1 k
+           1   7   1 g
+          56   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+          11   7   1 k
+           2   7   1 g
+          58   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+          11   7   1 k
+           3   7   1 g
+          61   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+          11   7   1 k
+           4   7   1 g
+          65   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+          11   7   1 k
+           5   7   1 g
+          70   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+          11   7   1 k
+           6   7   1 g
+          76   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+          11   7   1 k
+           7   7   1 g
+          83   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+          11   7   1 k
+           8   7   1 g
+          91   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+          11   7   1 k
+           9   7   1 g
+         100   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+          11   7   1 k
+          10   7   1 g
+         110   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+      -12345   7   1 k
+      -12345   7   1 g
+           0   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+           1   7   1 k
+      -12345   7   1 g
+           1   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+           2   7   1 k
+      -12345   7   1 g
+           3   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+           3   7   1 k
+      -12345   7   1 g
+           6   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+           4   7   1 k
+      -12345   7   1 g
+          10   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+           5   7   1 k
+      -12345   7   1 g
+          15   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+           6   7   1 k
+      -12345   7   1 g
+          21   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+           7   7   1 k
+      -12345   7   1 g
+          28   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+           8   7   1 k
+      -12345   7   1 g
+          36   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+           9   7   1 k
+      -12345   7   1 g
+          45   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+          10   7   1 k
+      -12345   7   1 g
+          55   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+          11   7   1 k
+           1   7   1 g
+          56   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+          11   7   1 k
+           2   7   1 g
+          58   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+          11   7   1 k
+           3   7   1 g
+          61   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+          11   7   1 k
+           4   7   1 g
+          65   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+          11   7   1 k
+           5   7   1 g
+          70   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+          11   7   1 k
+           6   7   1 g
+          76   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+          11   7   1 k
+           7   7   1 g
+          83   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+          11   7   1 k
+           8   7   1 g
+          91   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+          11   7   1 k
+           9   7   1 g
+         100   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           2   1   0 repeat
+         110   1   0 bigSum
+          11   7   1 k
+          10   7   1 g
+         110   7   1 sum
+--- dump of all levels end ---
++++ dump of all levels begin +++
+           3   1   0 repeat
+         220   1   0 bigSum
+--- dump of all levels end ---

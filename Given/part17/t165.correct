@@ -1,0 +1,81 @@
+running e2c t165
+warning: on line 10 statement(s) follows break statement
+warning: on line 17 statement(s) follows break statement
+warning: on line 59 statement(s) follows break statement
+warning: on line 86 statement(s) follows break statement
+k
+  declared on line 1 at nesting depth 0
+  assigned to on: 5 23 27 32 36 43 46 50 55 59 63 68 72 75 82 86 90
+  used on: 6 13 24 25 26 27 29 33 34 35 36 37 40 44 45 46 47 48 49 50 52 56 57 59 60 61 62 63 65 69 70 71 72 73 74 75 77 83 84 86 87 88 89 90 92 96
+j
+  declared on line 1 at nesting depth 0
+  assigned to on: 3 80 94
+  used on: 20 81 93 94 97
+sum
+  declared on line 1 at nesting depth 0
+  assigned to on: 4 6
+  used on: 6 7 15
+compiling the C generated code
+executing the a.out
+1
+2
+3
+4
+5
+6
+7
+888
+36
+1
+1111
+1
+2
+3
+4
+4
+2222
+1
+2
+3
+4
+4
+3333
+1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+12
+14
+16
+16
+4444
+11
+13
+15
+17
+17
+5555
+1
+3
+5
+7
+7
+6666
+11
+13
+15
+17
+17
+11
+13
+15
+17
+17
+17
+2

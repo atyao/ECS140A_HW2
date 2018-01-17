@@ -1,0 +1,305 @@
+#!/bin/bash
+# (this file is sourced, but give above so editor knows its type)
+
+# the tests to be run
+# initially null
+declare RANGE
+
+# hard-wired
+declare -r testFilePrefix="t"
+declare -r testFileDigits="[0-9]+"
+declare -r testFileSuffix="e"
+
+function setRANGE {
+
+    # already set, no point in recomputing.
+    if [ -n "$RANGE" ]
+    then
+	return
+    fi
+
+    if [ -z "$specificTests" ] && [ -z "$specificTests2" ]
+    then
+	RANGE="${testFilePrefix}*.${testFileSuffix}"
+    else
+	local -r massagedSpecificTests=$(massage "$specificTests")
+	RANGE="$massagedSpecificTests $specificTests2"
+    fi
+}
+
+# hard-wired
+# these have $t in them; eval will replace them.
+# CAUTION: variable used in loop below must be named "t" since "$t" used here.
+declare -a messages=("running e2c \$t" \
+			 "compiling the C generated code" \
+			 "executing the a.out")
+# use "-o a.out" for benefit of Cygwin and other such systems.
+declare -a commands=("PLACEHOLDER" \
+			 "cc \$t.c -lm -o a.out" \
+			 "./a.out")
+
+declare -a commands0=("java e2c < \$t.e" \
+		      "java e2c < \$t.e >| \$t.c" \
+		      "java e2c < \$t.e >| \$t.c" )
+
+
+
+# simulate modern bash's readarray
+## hack for now: global array.
+function myReadarray {
+    local status
+    while read status
+    do
+	correctStatusArray+=("$status")
+    done
+}
+
+function hw2special {
+    local numCommands=$1
+    local overallStatus=0 # return status
+
+    debug "hw2special"
+
+    setRANGE
+    debug "RANGE=$RANGE"
+
+    local efile
+    for eFile in $RANGE
+    do
+	# get prefix
+	# CAUTION: this variable must be named "t" since "$t"
+	# appears in messages and commands.
+	local t
+	# make sure it's a properly named file (i.e., *.e)
+	if [[ "$eFile" =~ ^(.*)(\.)($testFileSuffix)$ ]]
+	then
+	    t="${BASH_REMATCH[1]}"
+	else
+	    userError 0 0 "test \"$eFile\" doesn't end w/ \".$testFileSuffix\" so skipping it (consider using \"$eFile.$testFileSuffix\")"
+	    overallStatus=1
+	    continue
+	fi
+	debug "t=$t"
+	echo "==== $t ===="
+
+	# hard-wired
+	local outFile="$t.output"
+	local correctFile="$t.correct"
+
+	if ! doesFileExist "$correctFile"
+	then
+	    overallStatus=1
+	    continue
+	fi
+
+	local correctStatusFile="$t.correctStatus"
+
+	if ! doesFileExist "$correctStatusFile"
+	then
+	    overallStatus=1
+	    continue
+	fi
+
+	## hack for older bash -- global array for now.
+	##      local -a correctStatusArray
+	##      if ! myReadarray correctStatusArray < "$correctStatusFile"
+	unset correctStatusArray
+	declare -a correctStatusArray
+	myReadarray < "$correctStatusFile"
+	##      then
+	##          userError 0 1 "problem reading $correctStatusFile"
+	##      fi
+	
+
+	if ! [ $onlyShowDiffs -eq 0 ]
+	then
+	    # (re-)create the file
+	    # note how all output for below runCommands goes into this one file
+	    # (so don't use runCommand's redirectOutput parameter)
+	    echo -n "" > $outFile
+	    local i
+	    commands[0]="${commands0[$(($numCommands - 1))]}"
+	    for (( i = 0; i < $numCommands; i++ ))
+	    do
+		debug "${messages[$i]} ${commands[$i]}"
+		# eval will replace $t in messages with its value.
+		# eval will replace $t in commands with its value.
+		# the latter is redundant w/ the eval done w/i runCommand
+		# but is is better to do it here:
+		#    -- output of command will show expanded $t
+		#    -- avoid any problems (hiding) w/ dynamically scoped $t.
+		local a=`eval echo \"${messages[$i]}\"`
+		debug "a=$a"
+		local b=`eval echo \"${commands[$i]}\"`
+		debug "b=$b"
+		echo "$a" >> "$outFile" 2>&1
+
+		local expectedStatus=${correctStatusArray[$i]}
+		# integrity check
+		if ! isInteger "$expectedStatus"
+		then
+		    userError 0 0 "bad status (\"$expectedStatus\") in $correctStatusFile -- skipping rest of this test"
+		    overallStatus=1
+		    break
+		fi
+
+		# don't combine checking of $expectedStatus
+		# as part of runCommand
+		# since that generates error message,
+		# which this redirection would redirect.
+		runCommand "$b" "" "" "false" >> "$outFile"  2>&1
+		local runStatus=$?
+		compareStatuses "$b" $runStatus $expectedStatus
+		local compareStatus=$?
+
+		# don't keep doing other commands for this part
+		# if one command didn't complete as expected
+		# or if one didn't succeed (e.g., make fails, don't run.)
+		if [ $compareStatus -ne 0 ]
+		then
+		    overallStatus=1
+		    break
+		elif [ $runStatus -ne 0 ]
+		then
+		    break # go on to next test.
+		fi
+	    done
+	    # do even if status doesn't match.
+	    # (alternative; put diff command
+	    #  as another command in command array.)
+	    doConvertOutputFileToUnix "$outFile"
+	    if ! runDiffTool "$correctFile" "$outFile"
+	    then
+		overallStatus=1
+	    fi
+	else
+	    # written so that will runDiffTool once for each in RANGE.
+	    # (not once for each command.)
+	    if [ -r "$outFile" ]
+	    then
+		if ! runDiffTool "$correctFile" "$outFile"
+		then
+		    overallStatus=1
+		fi
+	    fi
+	fi
+    done
+
+    # returns whether there were any tests that had problems.
+    # that will inhibit next step (typically "make clean")
+    # from running and destroying the evidence ;-)
+    return $overallStatus
+
+}
+
+# check.
+# if doesn't, give warnings and return bad status.
+function doesFileExist {
+    local -r file="$1"
+    if ! [ -f "$file" ]
+    then
+	userError 0 0 "$file seems not to exist or is not a regular file"
+	return 1
+    elif ! [ -r "$file" ]
+    then
+	userError 0 0 "$file exists, but is not readable"
+	return 1
+    fi
+}
+
+function massage {
+    local -r tests="$1"
+    local result=""
+    local t
+    for t in $tests
+    do
+	# bash note: don't combine next two as exit status would be local's
+	local c
+	if c=$(canonicalize "$t")
+	then
+	    result+=" $c"
+	fi
+    done
+    echo "$result"
+}
+
+# recognizes these patterns:
+#
+#   ${prefix}$(num}.${suffix}
+#   ${prefix}$(num}.
+#   ${prefix}$(num}
+#   $(num}.${suffix}
+#   $(num}.
+#   $(num}
+#
+# and maps it to the 1st form above.
+function canonicalize {
+    local -r t="$1"
+    if match "$t"
+    then
+	echo "${testFilePrefix}${matchRetVal}.${testFileSuffix}"
+	return 0
+    else
+	userError 0 0 "don't understand test \"$t\" so skipping it (consider using -T)"
+	return 1
+    fi
+}
+
+declare matchRetVal
+# returns status of whether matched
+# and, if so, digits matched in above global.
+function match {
+    local -r string="$1"
+
+    ## deprecated: not really needed and older bash doesn't support namerefs
+    # same as globals, but their names are too long to type below ;-)
+    # (namerefs don't cost much)
+    ## local -n prefix=testFilePrefix
+    ## local -n digits=testFileDigits
+    ## local -n suffix=testFileSuffix
+
+    matchRetVal=""
+    # could combine these patterns using optional, but gets ugly fast.
+    # note use of extra () in last few so that always get
+    # digits in BASH_REMATCH[2].
+
+    ## http://stackoverflow.com/questions/15253792/bash-3-2-regex-pattern-not-matched-while-using
+
+    ## suggests that this exercises a bug in older bash
+    ## and the fix below.
+
+##    if [[ "$string" =~ ^($testFilePrefix)($testFileDigits)(\.)($testFileSuffix)$ ]] \
+##    || [[ "$string" =~ ^($testFilePrefix)($testFileDigits)(\.)$ ]]          \
+##    || [[ "$string" =~ ^($testFilePrefix)($testFileDigits)$ ]]              \
+##    || [[ "$string" =~ ^()($testFileDigits)(\.)($testFileSuffix)$ ]]        \
+##    || [[ "$string" =~ ^()($testFileDigits)(\.)$ ]]                 \
+##    || [[ "$string" =~ ^()($testFileDigits)$ ]]
+
+    local -r pat1="^($testFilePrefix)($testFileDigits)(\.)($testFileSuffix)$"
+    local -r pat2="^($testFilePrefix)($testFileDigits)(\.)$"
+    local -r pat3="^($testFilePrefix)($testFileDigits)$"
+    local -r pat4="^()($testFileDigits)(\.)($testFileSuffix)$"
+    local -r pat5="^()($testFileDigits)(\.)$"
+    local -r pat6="^()($testFileDigits)$"
+    if [[ "$string" =~ $pat1 ]] \
+    || [[ "$string" =~ $pat2 ]] \
+    || [[ "$string" =~ $pat3 ]] \
+    || [[ "$string" =~ $pat4 ]] \
+    || [[ "$string" =~ $pat5 ]] \
+    || [[ "$string" =~ $pat6 ]]
+    then
+	matchRetVal="${BASH_REMATCH[2]}"
+	return 0
+    else
+	return 1
+    fi
+}
+
+function isInteger {
+    if [ "$1" -eq "$1" ] 2>/dev/null
+    then
+	return 0
+    else
+	return 1
+    fi
+}

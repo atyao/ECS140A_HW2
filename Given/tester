@@ -1,0 +1,591 @@
+#!/bin/bash
+
+# ECS14A program testing tool
+
+# Copyright 2016 by Ronald A. Olsson
+#
+# Permission is granted only to use this code and its related files for
+# its intended purpose of testing programming assignments in Olsson's
+# ECS140A class at UC Davis.
+# Any other usage, without explicit written permission from Olsson,
+# is not allowed.
+
+# command and short name, for error messages.
+declare -r command="$0 $*"
+declare -r thisScriptName=` basename "$0"`
+
+# toggle some debugging output.
+declare debug=1
+
+# make the "debug tag" a bit unique so not likely to appear w/i regular output
+# (can grep out lines w/ it)
+declare -r debugTAG="DE+buG"
+function debug() {
+    local -r msg=$1
+
+    if [ $debug -eq 0 ]
+    then
+	echo "$debugTAG: $msg"
+    fi
+}
+
+
+# if script should exit,
+# shouldExit is some non-zero number, returned as exit status.
+function userError() {
+    local -r giveTryMsg=$1
+    local -r shouldExit=$2
+    local -r msg=$3
+
+    echo "$thisScriptName error: $msg" 1>&2
+    if [ $giveTryMsg -ne 0 ]
+    then
+        echo "Try '$thisScriptName --help' for more information." 1>&2
+    fi
+    if [ $shouldExit -ne 0 ]; then
+	exit $shouldExit
+    fi
+}
+
+
+
+### homework test parameters, flags  ###
+# from command line
+declare diffTool="diff"
+declare showDiff=false	# true if showdiff is set
+
+# name of HW Descriptor File
+declare -r HDF="HWDesc"
+declare -r markerPrefix="+" # indicates command lines in HDF, e.g., "+part3"
+
+### functions ###
+function printUsage {
+cat <<EOF
+Usage: $thisScriptName [OPTIONS]
+
+OPTIONS:
+	-h, --help
+		Display this help menu.
+	-d diffTool, --diff=diffTool
+		Use diffTool to compare expected and actual outputs;
+		default is diff.
+	-k, --k
+		Abbreviation for the useful "-d cmpORtkdiff".
+        -s, --showDiffs 
+		Show the differences from a previous run of $thisScriptName.
+	-t or --test
+		(HW2 only.)  Run only specified test(s).
+	-T or --Test
+		(HW2 only.)  Like -t, but for tests with non-standard names.
+	-m or --masquerade=partName
+		Run within a part subdirectory with a non-standard name
+		as though running within partName.
+
+For more information, see the web page for tester on the class web page.
+EOF
+}
+
+function mustCd {
+    local -r dir=$1
+    cd "$dir"
+    if [ $? -ne 0 ]
+    then
+	userError 0 1 "failed to change directory $dir"
+    fi
+}
+
+# returns $diffTool's exit status indicating whether two files are same.
+function runDiffTool {
+    local -r file1="$1"
+    local -r file2="$2"
+    $diffTool "$file1" "$file2"
+}
+
+# if no diffs, tkdiff still pops up and needs to be exited by a keystroke.
+# this doesn't invoke tkdiff unless there is a diff.
+#
+# not used by tester itself, but by users as the diffTool via "-d cmpORtkdiff"
+function cmpORtkdiff {
+    local -r file1="$1"
+    local -r file2="$2"
+    cmp -s "$file1" "$file2" || tkdiff "$file1" "$file2"
+}
+
+# runCommand returns:
+#   actual status of command
+function runCommand {
+	local cmnd=$1
+	local -r fileIn=$2
+	local -r fileOut=$3
+	local -r redirectOutput=$4
+
+	debug "              runCommand t=$t"
+	debug "runCommand cmnd=$cmnd"
+
+	# cmnd w/ any redirection
+	local rcmnd="$cmnd"
+	if [ -n "$fileIn" ]
+	then
+	    rcmnd+=" < $fileIn"
+	fi
+	if [ -n "$fileOut" ]
+	then
+	    rcmnd+=" > $fileOut"
+	fi
+	# do this *after* redirecting ">"
+	if [[ "$redirectOutput" == "true" ]]; then
+		rcmnd+=" 2>&1"
+	fi
+	eval $rcmnd
+	local runStatus=$?
+
+	debug "cmnd=$cmnd runStatus=$runStatus"
+
+	return $runStatus
+}
+
+# reads from stdin, which has been set (via redirection) by caller.
+function testAll {
+	local whichPart
+	local numRuns		# number of commands to run
+
+	local retStat=0 # status to return: did all goes as expected?
+	# handle each part
+	while searchHDF 1
+	do
+	    whichPart="$searchHDFRetValPart"
+	    numRuns=$searchHDFRetValNumRuns
+	    # got a part!
+	    debug "got a part! $whichPart $numRuns"
+	    mustCd "$whichPart"
+	    testPart "$whichPart" $numRuns
+	    retStat=$(($retStat || $?))
+	    mustCd ".."
+	done
+	return $retStat
+}
+
+# reads from stdin, which has been set (via redirection) by caller.
+# positioned at "+" lines in HDF
+function testPart {
+	local -r whichPart="$1"
+	local -r numRuns=$2		# number of commands to run runs
+
+	## read from HDF
+	local redirectOutput
+	    # true if command output should be redirected to output file
+	    # false if command redirects output itself (e.g., clisp, gprolog)
+	    #       or output not needed (e.g., make, rm)
+	local shouldDiff	# true if diffTool should be used
+	local YO		# output file name 
+	local YC		# correct output file name
+	local statusCorrect	# expected command status
+	local cmnd		# command called
+
+	local marker
+	local i
+
+	# status to return from this entire function -- did all go as expected?
+	local returnStatus=0
+
+	echo "======== $whichPart ========"
+
+	# loop for all the commands that need to be run
+	for (( i = 0; i < $numRuns; i++ )); do
+	    read marker redirectOutput shouldDiff YO YC statusCorrect cmnd
+	    debug "for loop i=$i marker=$marker numRuns=$numRuns \"cmnd=$cmnd\""
+	    # integrity check
+	    if [ "$marker" != "$markerPrefix$whichPart" ]
+	    then
+		userError 0 1 "got bad marker (\"$marker\") instead of expected (\"$markerPrefix$whichPart\") from \"$HDF\" file"
+	    fi
+	    if ! [ $onlyShowDiffs -eq 0 ]
+	    then
+		local runStatus
+		if [[ "$redirectOutput" == "true" ]]; then
+		    runCommand "$cmnd" "" "$YO" "$redirectOutput"
+		    runStatus=$?
+		else
+		    runCommand "$cmnd" "" "" "$redirectOutput"
+		    runStatus=$?
+		fi
+
+		compareStatuses "$cmnd" $runStatus $statusCorrect
+		returnStatus=$(($returnStatus || $?))
+
+		if [[ "$shouldDiff" == "true" ]]
+		then
+		    doConvertOutputFileToUnix "$YO"
+		    runDiffTool "$YC" "$YO"
+		    # shouldn't have any differences, so count it too.
+		    returnStatus=$(($returnStatus || $?))
+		fi
+	    elif isHW2
+	    then
+		# some magic (aka, a hack)
+		# need to runcommand hw2special
+		# to see its diff,
+		# but we skip over it above.
+		# could not skip over it, but that gets uglier.
+		# so special case it here.
+		# (could call a different function in Addendum,
+		#  which just does the diffs,
+		#  but that would replicate
+		# some of hw2special's code.)
+		hw2special 999 # any number will do
+		returnStatus=$?
+		# assume that only want to do this once
+		break
+	    else
+		# written so that will runDiffTool
+		# for each command for which $shouldDiff is set.
+		# set $returnStatus to pretend all was well.
+		returnStatus=0
+		if [ -r "$YO" ] && [ "$shouldDiff" == "true" ]
+		then
+		    runDiffTool $YC $YO
+		fi
+	    fi
+	    # don't keep doing other commands for this part
+	    # if one command didn't complete as expected.
+	    if [ $returnStatus -ne 0 ]
+	    then
+		break
+	    fi
+	    debug "end for loop i=$i numRuns=$numRuns \"cmnd=$cmnd\""
+	done
+	return $returnStatus
+}
+# check expected and actual statuses.
+# don't put this checking as part of runCommand
+# since that generates error message,
+# and invokers (namely for HW2) sometimes want to redirect stderr.    
+function compareStatuses {
+    local cmnd=$1
+    local got=$2
+    local wanted=$3
+    local returnStatus
+    if [ $got -ne $wanted ]
+    then
+	userError 0 0 "\"$cmnd\" completed with incorrect status of $got vs. expected status of $wanted"
+	returnStatus=1
+    else
+	returnStatus=0
+    fi
+    return $returnStatus
+}
+
+
+
+# user specified tests
+declare specificTests   # tests from -t
+declare specificTests2  # tests from -T
+
+# for -m, non-standard part
+declare masqueradeAs
+declare masqueradeOption
+
+# don't actually run the commands
+# only show diffs based on their last runs.
+declare onlyShowDiffs=1
+
+### read parameters ###
+
+# each LONGOPTION has a corresponding SHORTOPTION
+declare -r LO0="help,debug"
+declare -r LO1="diff:,k,masquerade:,showDiffs"
+declare -r LO2="test:,Test:"
+declare -r LONGOPTIONS="$LO0,$LO1,$LO2"
+
+declare -r SHORTOPTIONS="hgd:km:st:T:"
+
+# bash note: don't combine next two lines (declare and assignment)
+# since would get exit status of declare (success), not exit status of getopt.
+declare args
+
+# are we running with modern getopt?
+# Mac OS X has BSD style, which doesn't support long options
+# and supports only "getopt optstring parameters" form of invocation.
+# (we'll give up the luxury of long options for older getopt versions.)
+# note: man page for GNU getopt says GNU's exit status will be 4; other's 0.
+#       hope that's the case.
+if getopt -T >& /dev/null
+then
+    args=$(getopt "$SHORTOPTIONS" "$@")
+else
+    # getopt note: -o needs to be last option.
+    args=$(getopt --name=$thisScriptName -l "$LONGOPTIONS" -o "$SHORTOPTIONS" -- "$@")
+fi
+if [ $? -ne 0 ]
+then
+    userError 1 1 "couldn't process command line arguments"
+fi
+
+eval set -- "$args"
+# handle options and their arguments
+while true
+do
+    declare arg="$1"
+    case "$arg" in
+	-h|--help)
+	    printUsage
+	    exit 0
+	    ;;
+	-g|--debug)
+	    shift
+	    debug=$((!$debug))
+	    ;;
+	-d|--diff)
+	    shift
+	    diffTool="$1"
+	    shift
+	    ;;
+	-k|--k)
+	    shift
+	    diffTool="cmpORtkdiff"
+	    ;;
+	-m|--masquerade)
+	    shift
+	    masqueradeOption="$1"
+	    masqueradeAs="$1"
+	    shift
+	    ;;
+	-t|--tests)
+	    shift
+	    specificTests+=" $1"
+	    shift
+	    ;;
+	-T|--Tests)
+	    shift
+	    specificTests2+=" $1"
+	    shift
+	    ;;
+	-s|--showDiffs)
+	    shift
+	    onlyShowDiffs=0
+	    ;;
+	--)
+	    shift
+	    break
+	    ;;
+	*)
+	    userError 1 1 "unknown command-line argument \"$arg\""
+	    # above exits
+	    ;;
+    esac
+done
+
+if [ $# -gt 0 ]
+then
+    userError 1 1 "unknown command-line argument(s) \"$*\""
+fi
+
+declare onCygwinEtc=0
+# this test captures Cygwin, MinGW, and Msys2.
+# all Linux shell environments on Windows have "_NT" in their kernel names.
+if [[ "$(uname -s)" == *_NT* ]]
+then
+    onCygwinEtc=1
+fi
+
+
+
+# need to "unix-ize" output files?
+# i.e., run dos2unix on them to change DOS format into Unix format.
+# we assume that the "correct" output files are in Unix format.
+declare convertOutputFileToUnix=1
+if [ $onCygwinEtc -eq 1 ]
+then
+    convertOutputFileToUnix=0
+fi
+
+function doConvertOutputFileToUnix {
+    local -r file="$1"
+    if [ $convertOutputFileToUnix -eq 0 ]
+    then
+	dos2unix --quiet "$file"
+    fi
+}
+
+# note: considered using bash's way to figure out location of source
+#       (using ${BASH_SOURCE[0], etc.)
+#       but for testing new versions, that location wouldn't relate to relPath.
+declare relPath
+declare relPathHDF
+
+# are we in main HW directory or in a part directory?
+# null means false
+declare inHW
+declare inPart
+
+
+# find $HDF
+# sets globals, as appropriate
+function findHDF {
+    if [ -e "$HDF" ]
+    then
+	inHW=0 # any non-null
+	relPath="."
+    elif [ -e "../$HDF" ]
+    then
+	inPart=0 # any non-null
+	relPath=".."
+    else
+	userError 0 1 "can't find $HDF"
+    fi
+    relPathHDF="$relPath/$HDF"
+    # sanity check
+    if [ ! -r "$relPathHDF" ]
+    then
+	userError 0 1 "found $relPathHDF but can't read it (use chmod to fix its permission bits)"
+    fi
+    debug "found $relPathHDF $relPathHDF"
+}
+
+# supposedly in a part directory.
+# check that it's known.
+# return that part in a global
+declare findPartRetVal
+function findPart {
+    local -r where=`pwd`
+    local -r base=`basename "$where"`
+    debug "base=$base"
+
+    debug "rel=$relPathHDF base=$base"
+    checkPartName "$base" # exits if bad part
+    findPartRetVal="$base"
+}
+
+# known part name?
+function checkPartName {
+    local -r base="$1"
+    
+    if ! searchHDF 0 "$base" < "$relPathHDF"
+    then
+	userError 1 1 "found $base but that's not a standard part name (use, e.g., \"-m part06\" to specify part06)"
+    fi
+
+    debug "checkPartName found part $base !"
+
+}
+
+# search HDF for part
+# reads from stdin, which has been set (via redirection) by caller.
+# two modes:
+#   search for given part
+#   search for next part
+# for either successful search, sets globals for that part
+declare searchHDFRetValPart
+declare searchHDFRetValNumRuns
+function searchHDF {
+    local -r givenPartMode=$1
+    local -r part="$2"
+
+    local whichPart
+    local numRuns
+
+    while read whichPart numRuns
+    do
+	case $whichPart in
+            "#"*)   continue;;
+	    "$markerPrefix"*)   continue;;
+            "")     continue;;
+	    *)
+		if [ $givenPartMode -eq 1 ] || [ "$whichPart" = "$part" ]
+		then
+		    searchHDFRetValPart="$whichPart"
+		    searchHDFRetValNumRuns=$numRuns
+		    return 0
+		fi
+		;;
+   	esac
+    done
+    return 1
+}
+
+# calls other functions that read from stdin,
+# which has been set (via redirection) by caller.
+function doAPart {
+    local thePart="$1"
+    local numRuns
+
+    searchHDF 0 "$thePart"
+    numRuns=$searchHDFRetValNumRuns
+    testPart "$thePart" $numRuns
+    # returns testPart's status
+}
+
+
+# these are very conservative.
+# ideally, specify for each HW, or even part of HW.
+if [ $onCygwinEtc -eq 0 ]
+then
+    # not supported on Cygwin.
+    ulimit -t 12		# time (seconds)
+    ulimit -f 12000		# space (disk blocks)
+fi
+# if ulimit -f is exceeded, core file is created, but we don't want one
+ulimit -c 0		# prevent core file from being created
+
+### test ###
+
+findHDF
+
+# any extra pieces needed for testing?
+declare -r testerAddendum="testerAddendum"
+if [ -r "$relPath/$testerAddendum" ]
+then
+    source "$relPath/$testerAddendum"
+fi
+
+# are we testing HW2?
+# don't use this function until after doing above source.
+function isHW2 {
+    declare -F hw2special > /dev/null
+}
+
+if ! isHW2 && ( [ -n "$specificTests" ] || [ -n "$specificTests2" ] )
+then
+    userError 0 1 "can only use \"-t\" or \"-T\" with HW2"
+fi
+
+declare retStatus=0
+if [ -n "$inPart" ]
+then
+    debug "inPart"
+    declare thePart
+    if [ -n "$masqueradeAs" ]
+    then
+	checkPartName "$masqueradeAs"
+	thePart="$masqueradeAs"
+    else
+	findPart
+	thePart="$findPartRetVal"
+    fi
+
+    doAPart "$thePart" < "$relPathHDF"
+    retStat=$?
+
+elif [ -n "$inHW" ]
+then
+    if [ -n "$masqueradeAs" ]
+    then
+	userError 0 1 "$masqueradeOption specified in HW directory; must be in a part directory (so, first cd to where you want to test)"
+    fi
+    debug "inHW $relPathHDF"
+    testAll < "$relPathHDF"
+    retStat=$?
+    echo -n "$thisScriptName   summary: "
+    if [ $retStat -eq 0 ]
+    then
+	echo "all went well!"
+    else
+	echo "some possible problems, which were previously noted."
+    fi
+else
+    userError 0 1 "OOPS: neither inPart (\"$inPart\") nor inHW (\"$inHW\")"
+fi
+
+# returns exit status of testing commands.
+exit $retStat
+

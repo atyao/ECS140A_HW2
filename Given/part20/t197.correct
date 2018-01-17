@@ -1,0 +1,141 @@
+running e2c t197
+repeat
+  declared on line 1 at nesting depth 0
+  assigned to on: 5
+  used on: 14
+bigSum
+  declared on line 1 at nesting depth 0
+  assigned to on: 3 25
+  used on: 25
+once
+  declared on line 1 at nesting depth 0
+  assigned to on: 9
+  never used
+einmal
+  declared on line 1 at nesting depth 0
+  assigned to on: 11
+  never used
+g
+  declared on line 6 at nesting depth 1
+  assigned to on: 20
+  used on: 21
+sum
+  declared on line 6 at nesting depth 1
+  assigned to on: 7 21
+  used on: 21 25
+k
+  declared on line 12 at nesting depth 3
+  assigned to on: 13
+  used on: 14
+compiling the C generated code
+executing the a.out
++++ dump on line 10 of level 1 begin +++
+      -12345   6   1 g
+           0   6   1 sum
+--- dump on line 10 of level 1 end ---
+1
+1
++++ dump on line 15 of level 2 begin +++
+--- dump on line 15 of level 2 end ---
+1
+2
++++ dump on line 15 of level 2 begin +++
+--- dump on line 15 of level 2 end ---
++++ dump on line 22 of level 1 begin +++
+           1   6   1 g
+           1   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           2   6   1 g
+           3   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           3   6   1 g
+           6   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           4   6   1 g
+          10   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           5   6   1 g
+          15   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           6   6   1 g
+          21   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           7   6   1 g
+          28   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           8   6   1 g
+          36   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           9   6   1 g
+          45   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+          10   6   1 g
+          55   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 10 of level 1 begin +++
+      -12345   6   1 g
+           0   6   1 sum
+--- dump on line 10 of level 1 end ---
+2
+1
++++ dump on line 15 of level 2 begin +++
+--- dump on line 15 of level 2 end ---
+2
+2
++++ dump on line 15 of level 2 begin +++
+--- dump on line 15 of level 2 end ---
++++ dump on line 22 of level 1 begin +++
+           1   6   1 g
+           1   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           2   6   1 g
+           3   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           3   6   1 g
+           6   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           4   6   1 g
+          10   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           5   6   1 g
+          15   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           6   6   1 g
+          21   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           7   6   1 g
+          28   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           8   6   1 g
+          36   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+           9   6   1 g
+          45   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 22 of level 1 begin +++
+          10   6   1 g
+          55   6   1 sum
+--- dump on line 22 of level 1 end ---
++++ dump on line 29 of all levels begin +++
+           3   1   0 repeat
+         110   1   0 bigSum
+           2   1   0 once
+           2   1   0 einmal
+--- dump on line 29 of all levels end ---

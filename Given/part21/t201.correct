@@ -1,0 +1,11 @@
+running e2c t201
+compiling the C generated code
+executing the a.out
+---- Execution Counts ----
+ num line    count
+   1    1        1
+   2    2        1
+   3    2        1
+   4    2        1
+   5    3        1
+   6    7        1

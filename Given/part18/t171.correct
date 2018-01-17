@@ -1,0 +1,49 @@
+running e2c t171
+warning: on line 7 break 0 statement ignored
+warning: on line 11 break statement exceeding loop nesting ignored
+warning: on line 13 break 0 statement ignored
+warning: on line 33 break statement outside of loop ignored
+k
+  declared on line 1 at nesting depth 0
+  assigned to on: 5 20
+  used on: 6 17 21 25
+j
+  declared on line 1 at nesting depth 0
+  assigned to on: 3
+  used on: 26 32
+i
+  declared on line 1 at nesting depth 0
+  assigned to on: 10
+  used on: 12
+sum
+  declared on line 1 at nesting depth 0
+  assigned to on: 4 6
+  used on: 6 8 19 27
+compiling the C generated code
+executing the a.out
+1
+2
+3
+4
+5
+6
+7
+888
+78
+79
+36
+9
+1
+2
+3
+4
+5
+6
+7
+888
+78
+79
+36
+9
+2
+7654321

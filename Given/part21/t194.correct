@@ -1,0 +1,112 @@
+running e2c t194
+warning: on line 21 dump statement level (999) exceeds block nesting level (0). using 0
+repeat
+  declared on line 1 at nesting depth 0
+  assigned to on: 5
+  never used
+bigSum
+  declared on line 1 at nesting depth 0
+  assigned to on: 3 17
+  used on: 17
+k
+  declared on line 8 at nesting depth 1
+  assigned to on: 12
+  used on: 13
+sum
+  declared on line 8 at nesting depth 1
+  assigned to on: 10 13
+  used on: 13 17
+compiling the C generated code
+executing the a.out
++++ dump on line 11 of level 1 begin +++
+      -12345   8   1 k
+           0   8   1 sum
+--- dump on line 11 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           1   8   1 k
+           1   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           2   8   1 k
+           3   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           3   8   1 k
+           6   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           4   8   1 k
+          10   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           5   8   1 k
+          15   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           6   8   1 k
+          21   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           7   8   1 k
+          28   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           8   8   1 k
+          36   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           9   8   1 k
+          45   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+          10   8   1 k
+          55   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 11 of level 1 begin +++
+      -12345   8   1 k
+           0   8   1 sum
+--- dump on line 11 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           1   8   1 k
+           1   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           2   8   1 k
+           3   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           3   8   1 k
+           6   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           4   8   1 k
+          10   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           5   8   1 k
+          15   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           6   8   1 k
+          21   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           7   8   1 k
+          28   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           8   8   1 k
+          36   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+           9   8   1 k
+          45   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 14 of level 1 begin +++
+          10   8   1 k
+          55   8   1 sum
+--- dump on line 14 of level 1 end ---
++++ dump on line 21 of level 0 begin +++
+           3   1   0 repeat
+         110   1   0 bigSum
+--- dump on line 21 of level 0 end ---

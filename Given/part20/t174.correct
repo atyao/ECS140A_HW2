@@ -1,0 +1,10 @@
+running e2c t174
+k
+  declared on line 3 at nesting depth 0
+  assigned to on: 4
+  never used
+compiling the C generated code
+executing the a.out
+1142
+1142
+1145
