@@ -18,19 +18,16 @@ public class Scan {
             if (args.length == 0) {
                 InputStreamReader isr = new InputStreamReader(System.in);
                 br = new BufferedReader(isr);
-            }
-            else if (args.length > 1) {
-                System.err.println("too many command line arguments("+
-                                   args.length+"); want 0 or 1" );
+            } else if (args.length > 1) {
+                System.err.println("too many command line arguments(" +
+                        args.length + "); want 0 or 1");
                 System.exit(1);
-            }
-            else {
+            } else {
                 FileReader fr = new FileReader(args[0]);
                 br = new BufferedReader(fr);
             }
-        }
-        catch (Exception oops) {
-            System.err.println("Exception opening file "+args[0]+"\n");
+        } catch (Exception oops) {
+            System.err.println("Exception opening file " + args[0] + "\n");
             oops.printStackTrace();
         }
 
@@ -51,79 +48,76 @@ public class Scan {
     private boolean got_eof; // true iff have seen EOF
     private boolean putback; // true iff put a char back
     private int c;           // current or putback char
-                             // (int rather than char to handle EOF)
+    // (int rather than char to handle EOF)
     private static final int EOF = -1;
 
     // call to advance token stream.
     // acts as a generator (iterator) over input.
     // returns Token
     public Token scan() {
-        if( got_eof ) {
+        if (got_eof) {
             System.err.println("scan: oops -- called after eof.");
             return new Token(TK.ERROR, "called after eof", linenumber);
         }
 
-        while(true) {
+        while (true) {
 // QUESTION 1: What is purpose of putback?
 
 // QUESTION 2: What are the values of putback and c just before the identifier
 //             'hello' is returned from the input 'hello*45'?
 
-            if( putback) {
+            if (putback) {
                 putback = false;
-            }
-            else {
+            } else {
                 c = getchar();
             }
-            if ( myisalpha((char) c) ) {
+            if (myisalpha((char) c)) {
                 /* identifier. */
                 String id = buildID();
                 return new Token(keywordLookup(id), id, linenumber);
-            }
-            else if ( myisdigit((char) c) ) {
+            } else if (myisdigit((char) c)) {
                 /* number. */
                 return new Token(TK.NUM, buildNUM(), linenumber);
-            }
-            else {
-                switch( c ) {
+            } else {
+                switch (c) {
                     case '(':
-                        return ccase1('(',TK.LPAREN);
+                        return ccase1('(', TK.LPAREN);
                     case ')':
-                        return ccase1(')',TK.RPAREN);
+                        return ccase1(')', TK.RPAREN);
                     case '+':
-                        return ccase1('+',TK.PLUS);
+                        return ccase1('+', TK.PLUS);
                     case '*':
-                        return ccase1('*',TK.TIMES);
+                        return ccase1('*', TK.TIMES);
                     case '=':
-                        return ccase1('=',TK.EQ);
+                        return ccase1('=', TK.EQ);
                     case '^':
-                        return ccase1('^',TK.SQUARE);
+                        return ccase1('^', TK.SQUARE);
                     case '@':
-                        return ccase1('@',TK.SQRT);
+                        return ccase1('@', TK.SQRT);
 
 // QUESTION 3:  What does the following case and the code in it do?
 
                     case '/':
-                        return ccase1or2('/','=',TK.DIVIDE,TK.NE);
+                        return ccase1or2('/', '=', TK.DIVIDE, TK.NE);
 
                     case '<':
-                        return ccase1or2('<','=',TK.LT,TK.LE);
+                        return ccase1or2('<', '=', TK.LT, TK.LE);
                     case '>':
-                        return ccase1or2('>','=',TK.GT,TK.GE);
+                        return ccase1or2('>', '=', TK.GT, TK.GE);
 
                     case ':':
-                        return ccase2(':','=',TK.ASSIGN);
+                        return ccase2(':', '=', TK.ASSIGN);
 
                     case '[':
-                        return ccase2('[',']',TK.BOX);
+                        return ccase2('[', ']', TK.BOX);
                     case '-':
-                        return ccase1or2('-','>',TK.MINUS,TK.ARROW);
+                        return ccase1or2('-', '>', TK.MINUS, TK.ARROW);
 
                     case EOF:
                         got_eof = true;
                         return new Token(TK.EOF,
-                                         new String("*EOF*"),
-                                         linenumber);
+                                new String("*EOF*"),
+                                linenumber);
                     case '\n':
                         linenumber++;
                         break;
@@ -134,14 +128,14 @@ public class Scan {
                     case '#': // gobble comments
                         do {
                             c = getchar();
-                        } while( c != '\n' && c != EOF );
+                        } while (c != '\n' && c != EOF);
                         putback = true;
                         break;
                     default:
                         System.err.println(
-                                           "scan: line "+linenumber+
-                                           " bad char "+showChar(c)
-					   );
+                                "scan: line " + linenumber +
+                                        " bad char " + showChar(c)
+                        );
                         break;
                 }
             }
@@ -162,8 +156,8 @@ public class Scan {
 
     // for better error messages, give character, if readable, and ASCII value.
     private String showChar(int c) {
-        return (!Character.isISOControl(c)? "\""+((char)c)+"\" ":"")+
-	    "(ASCII " + c + ")";
+        return (!Character.isISOControl(c) ? "\"" + ((char) c) + "\" " : "") +
+                "(ASCII " + c + ")";
     }
 
     private Token ccase1(char c, TK r) {
@@ -175,10 +169,9 @@ public class Scan {
         if (c == c2) {
             return new Token(
                     r2,
-                    new String(String.valueOf(c1)+String.valueOf(c2)),
+                    new String(String.valueOf(c1) + String.valueOf(c2)),
                     linenumber);
-        }
-        else {
+        } else {
             putback = true;
             return new Token(r1, new String(String.valueOf(c1)), linenumber);
         }
@@ -188,13 +181,12 @@ public class Scan {
         c = getchar();
         if (c == c2) {
             return new Token(
-                     r, String.valueOf(c1)+String.valueOf(c2),
-                     linenumber);
-        }
-        else {
+                    r, String.valueOf(c1) + String.valueOf(c2),
+                    linenumber);
+        } else {
             System.err.println("scan: got " + c1 +
-                               " missing " + c2 +
-                               " (got "+showChar(c)+")");
+                    " missing " + c2 +
+                    " (got " + showChar(c) + ")");
             return new Token(TK.ERROR, "bad ccase2", linenumber);
         }
     }
@@ -211,12 +203,14 @@ public class Scan {
             str += (char) c;
             k++;
             c = getchar();
-        } while( myisalpha((char) c) && k < MAXLEN_ID );
+        } while (myisalpha((char) c) && k < MAXLEN_ID);
         putback = true;
-        if( myisalpha((char) c) && k == MAXLEN_ID ) {
-            do { c = getchar(); } while(myisalpha((char) c));
+        if (myisalpha((char) c) && k == MAXLEN_ID) {
+            do {
+                c = getchar();
+            } while (myisalpha((char) c));
             System.err.println("scan: identifier too long -- truncated to "
-                               + str);
+                    + str);
         }
         return str;
     }
@@ -230,12 +224,14 @@ public class Scan {
             str += (char) c;
             k++;
             c = getchar();
-        } while( myisdigit((char) c) && k < MAXLEN_ID );
+        } while (myisdigit((char) c) && k < MAXLEN_ID);
         putback = true;
-        if( myisdigit((char) c) && k == MAXLEN_ID ) {
-            do { c = getchar(); } while(myisdigit((char) c));
+        if (myisdigit((char) c) && k == MAXLEN_ID) {
+            do {
+                c = getchar();
+            } while (myisdigit((char) c));
             System.err.println("scan: number too long -- truncated to "
-                               + str);
+                    + str);
         }
         return str;
     }
@@ -258,19 +254,20 @@ public class Scan {
     private TK keywordLookup(String str) {
         // test for each keyword token, one after another.
         //(not best way to handle this, but expedient.)
-        if (str.equals("var"))       return TK.VAR;
-        if (str.equals("rav"))       return TK.RAV;
-        if (str.equals("print"))     return TK.PRINT;
-        if (str.equals("if"))        return TK.IF;
-        if (str.equals("fi"))        return TK.FI;
-        if (str.equals("do"))        return TK.DO;
-        if (str.equals("od"))        return TK.OD;
-        if (str.equals("else"))      return TK.ELSE;
-        if (str.equals("fa"))        return TK.FA;
-        if (str.equals("af"))        return TK.AF;
-        if (str.equals("to"))        return TK.TO;
-        if (str.equals("st"))        return TK.ST;
- 
+        if (str.equals("var")) return TK.VAR;
+        if (str.equals("rav")) return TK.RAV;
+        if (str.equals("print")) return TK.PRINT;
+        if (str.equals("if")) return TK.IF;
+        if (str.equals("fi")) return TK.FI;
+        if (str.equals("do")) return TK.DO;
+        if (str.equals("od")) return TK.OD;
+        if (str.equals("else")) return TK.ELSE;
+        if (str.equals("fa")) return TK.FA;
+        if (str.equals("af")) return TK.AF;
+        if (str.equals("to")) return TK.TO;
+        if (str.equals("st")) return TK.ST;
+        if (str.equals("skip")) return TK.SKIP;
+
         // no keyword matched, so ...
         return TK.ID;
     }

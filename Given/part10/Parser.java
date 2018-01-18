@@ -7,12 +7,13 @@ public class Parser {
     // when there is only a single token in the set,
     // we generally just compare tkrep with the first token.
     TK f_declarations[] = {TK.VAR, TK.none};
-    TK f_statement[] = {TK.ID, TK.PRINT, TK.IF, TK.DO, TK.FA, TK.none};
+    TK f_statement[] = {TK.ID, TK.PRINT, TK.IF, TK.DO, TK.FA, TK.SKIP, TK.none};
     TK f_print[] = {TK.PRINT, TK.none};
     TK f_assignment[] = {TK.ID, TK.none};
     TK f_if[] = {TK.IF, TK.none};
     TK f_do[] = {TK.DO, TK.none};
     TK f_fa[] = {TK.FA, TK.none};
+    TK f_skip[] = {TK.SKIP, TK.none};
     TK f_expression[] = {TK.ID, TK.NUM, TK.LPAREN, TK.none};
 
     // tok is global to all these parsing methods;
@@ -95,8 +96,13 @@ public class Parser {
             doproc();
         else if( first(f_fa) )
             fa();
+        else if(first(f_skip))
+            skip();
         else
             parse_error("statement");
+    }
+    private void skip(){
+        mustbe(TK.SKIP);
     }
 
     private void assignment(){

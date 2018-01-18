@@ -16,7 +16,7 @@ public enum TK {
     AF,      // af
     TO,      // to
     ST,      // st
-  
+
     ASSIGN,   // :=
     LPAREN,   // (
     RPAREN,   // )
@@ -24,7 +24,7 @@ public enum TK {
     MINUS,    // -
     TIMES,    // *
     DIVIDE,   // /
-
+    SKIP,   // skip
     SQUARE,   // ^
     SQRT,     // @
 
