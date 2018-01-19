@@ -118,6 +118,7 @@ public class Parser {
     {
     	mustbe(TK.STOP);
     	gcprint("exit(0);");
+    	//translation-time warning message to get rid of warning messages in compile time
     	if(first(f_statement))
     	{
     		System.err.println("warning: on line " + tok.lineNumber + " statement(s) follows stop statement");
