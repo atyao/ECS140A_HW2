@@ -87,8 +87,6 @@ public class Parser {
     private void statement_list(){
         while( first(f_statement) ) {
             statement();
-            //
-            //if(statement() == TK.STOP);
         }
     }
 
@@ -120,6 +118,12 @@ public class Parser {
     {
     	mustbe(TK.STOP);
     	gcprint("exit(0);");
+    	if(first(f_statement))
+    	{
+    		System.err.println("warning: on line " + tok.lineNumber + " statement(s) follows stop statement");
+    	}
+    	//warning: on line 9 statement(s) follows stop statement
+    	//warning: on line 14 statement(s) follows stop statement
     }
 
     private void assignment(){
