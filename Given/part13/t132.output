@@ -1,0 +1,4 @@
+running e2c t132
+scan: line 7 bad char "%" (ASCII 37)
+mustbe: want AF, got Token(NUM 5 7)
+can't parse: line 7 missing token (mustbe)
