@@ -100,6 +100,8 @@ public class Scan {
                         return ccase1('^',TK.SQUARE);
                     case '@':
                         return ccase1('@',TK.SQRT);
+                    case '%':
+                        return ccase1('%', TK.MODULO);
 
 // QUESTION 3:  What does the following case and the code in it do?
 

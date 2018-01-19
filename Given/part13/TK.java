@@ -24,6 +24,7 @@ public enum TK {
     MINUS,    // -
     TIMES,    // *
     DIVIDE,   // /
+    MODULO,   // %
 
     SQUARE,   // ^
     SQRT,     // @

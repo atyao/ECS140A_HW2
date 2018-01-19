@@ -232,7 +232,7 @@ public class Parser {
 
     private void term(){
         factor();
-        while(  is(TK.TIMES) || is(TK.DIVIDE) ) {
+        while(  is(TK.TIMES) || is(TK.DIVIDE) || is(TK.MODULO)) {
             gcprint(tok.string);
             scan();
             factor();
