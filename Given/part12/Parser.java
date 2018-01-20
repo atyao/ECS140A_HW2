@@ -109,12 +109,10 @@ public class Parser {
     }
 
     private void stop(){
-        symtab.begin_st_block();
         mustbe(TK.STOP);
         gcprint("exit(0);");
-        String msg = String.format("warning: on line %d statement(s) follows stop statement\n", tok.lineNumber);
-        symtab.add_var_entry(msg, tok.lineNumber);
-        symtab.end_st_block();
+        if(first(f_statement))
+            System.err.println( "warning: on line "+ tok.lineNumber + " statement(s) follows stop statement");
     }
 
     private void skip(){
