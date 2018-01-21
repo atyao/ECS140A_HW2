@@ -35,7 +35,7 @@ print mod(mod(8,5)*mod(19,7)*mod(mod(1000,mod(2000,1009))+mod(19,11),5)+74,
 
 print 777
 
-# this loop will cause program (when k=0) to terminate with "mod 0" error
+#this loop will cause program (when k=0) to terminate with "mod 0" error
 fa k := 0-10 to 10 ->
     print k
     print mod(5,k)

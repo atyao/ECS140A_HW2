@@ -1,0 +1,58 @@
+running e2c t019
+state
+  declared on line 1 at nesting depth 0
+  assigned to on: 15 17 18 19 20 21
+  used on: 17(2) 18(2) 19(2) 20(2) 21(2) 23
+ta
+  declared on line 2 at nesting depth 0
+  assigned to on: 9 17
+  used on: 17(2)
+tb
+  declared on line 2 at nesting depth 0
+  assigned to on: 10 18
+  used on: 18(2)
+tc
+  declared on line 2 at nesting depth 0
+  assigned to on: 11 19
+  used on: 19(2)
+td
+  declared on line 2 at nesting depth 0
+  assigned to on: 12 20
+  used on: 20(2)
+te
+  declared on line 2 at nesting depth 0
+  assigned to on: 13 21
+  used on: 21(2)
+na
+  declared on line 3 at nesting depth 0
+  assigned to on: 9
+  used on: 17
+nb
+  declared on line 3 at nesting depth 0
+  assigned to on: 10
+  used on: 18
+nc
+  declared on line 3 at nesting depth 0
+  assigned to on: 11
+  used on: 19
+nd
+  declared on line 3 at nesting depth 0
+  assigned to on: 12
+  used on: 20
+ne
+  declared on line 3 at nesting depth 0
+  assigned to on: 13
+  used on: 21
+compiling the C generated code
+executing the a.out
+303
+303
+505
+202
+202
+202
+101
+101
+101
+404
+99

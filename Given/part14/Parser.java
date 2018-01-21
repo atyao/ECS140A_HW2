@@ -54,7 +54,7 @@ public class Parser {
         gcprint("int esqrt(int x){ double y; if (x < 0) return 0; y = sqrt((double)x); return (int)y;}");
         gcprint("#include <stdlib.h>");
         gcprint("#include <stdio.h>");
-        gcprint("int checkZero(int x) { if(x == 0) printf(\"Divide by zero\"); exit(1); return x;}");
+        gcprint("int checkZero(int x) { if(x == 0) exit(1); return x;}");
         gcprint("int main() {");
 	block();
         gcprint("return 0; }");
