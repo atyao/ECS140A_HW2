@@ -1,0 +1,28 @@
+List students alphabetically,
+
+   sorting by ***last name***.
+
+
+Include CSIF account name for each student.
+Do not include student ID numbers.
+E.g.,
+
+Doe, Diane   ddoe
+Smith, Joe   joesmith
+
+
+Status:
+
+part11: Works on all tests.
+part12: Works on all tests.
+part13: Works on all tests.
+part14: Works on all tests.
+part15: Works on all tests.
+part16: Works on all tests.
+part17: Works on all tests.
+part18: Works on all tests.
+part19: Mostly works, but doesn't give line numbers.
+part20: Did not attempt.
+part21: Did not attempt.
+
+Overall: Any comment/discussion related to this HW.

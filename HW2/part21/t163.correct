@@ -1,0 +1,21 @@
+running e2c t163
+warning: on line 9 statement(s) follows break statement
+k
+  declared on line 1 at nesting depth 0
+  assigned to on: 4
+  used on: 5 11
+sum
+  declared on line 1 at nesting depth 0
+  assigned to on: 3 5
+  used on: 5 6 13
+compiling the C generated code
+executing the a.out
+1
+2
+3
+4
+5
+6
+7
+888
+36

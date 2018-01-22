@@ -1,0 +1,15 @@
+running e2c t121
+k
+  declared on line 1 at nesting depth 0
+  assigned to on: 2 6
+  used on: 2(2) 3 8(2)
+n
+  declared on line 1 at nesting depth 0
+  assigned to on: 5 8
+  used on: 8 12
+compiling the C generated code
+executing the a.out
+5
+1
+2
+8888

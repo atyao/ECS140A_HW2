@@ -1,0 +1,3 @@
+running e2c t141
+mustbe: want RPAREN, got Token(COMMA , 5)
+can't parse: line 5 missing token (mustbe)

@@ -1,0 +1,35 @@
+running e2c t193
+k
+  declared on line 1 at nesting depth 0
+  assigned to on: 5
+  used on: 6
+sum
+  declared on line 1 at nesting depth 0
+  assigned to on: 3 6
+  used on: 6
+compiling the C generated code
+executing the a.out
++++ dump on line 4 of all levels begin +++
+      -12345   1   0 k
+           0   1   0 sum
+--- dump on line 4 of all levels end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---

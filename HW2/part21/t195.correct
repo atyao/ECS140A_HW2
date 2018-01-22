@@ -1,0 +1,195 @@
+running e2c t195
+repeat
+  declared on line 1 at nesting depth 0
+  assigned to on: 5
+  never used
+bigSum
+  declared on line 1 at nesting depth 0
+  assigned to on: 3 19
+  used on: 19
+k
+  declared on line 8 at nesting depth 1
+  assigned to on: 13
+  used on: 14
+sum
+  declared on line 8 at nesting depth 1
+  assigned to on: 10 14
+  used on: 14 19
+compiling the C generated code
+executing the a.out
++++ dump on line 11 of level 0 begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+--- dump on line 11 of level 0 end ---
++++ dump on line 12 of level 1 begin +++
+      -12345   8   1 k
+           0   8   1 sum
+--- dump on line 12 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           1   8   1 k
+           1   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           2   8   1 k
+           3   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           3   8   1 k
+           6   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           4   8   1 k
+          10   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           5   8   1 k
+          15   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           6   8   1 k
+          21   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           7   8   1 k
+          28   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           8   8   1 k
+          36   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           9   8   1 k
+          45   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+          10   8   1 k
+          55   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 11 of level 0 begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+--- dump on line 11 of level 0 end ---
++++ dump on line 12 of level 1 begin +++
+      -12345   8   1 k
+           0   8   1 sum
+--- dump on line 12 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           1   8   1 k
+           1   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           2   8   1 k
+           3   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           3   8   1 k
+           6   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           4   8   1 k
+          10   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           5   8   1 k
+          15   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           6   8   1 k
+          21   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           7   8   1 k
+          28   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           8   8   1 k
+          36   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+           9   8   1 k
+          45   8   1 sum
+--- dump on line 16 of level 1 end ---
++++ dump on line 15 of level 0 begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+--- dump on line 15 of level 0 end ---
++++ dump on line 16 of level 1 begin +++
+          10   8   1 k
+          55   8   1 sum
+--- dump on line 16 of level 1 end ---

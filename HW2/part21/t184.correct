@@ -1,0 +1,155 @@
+running e2c t184
+repeat
+  declared on line 1 at nesting depth 0
+  assigned to on: 5
+  never used
+bigSum
+  declared on line 1 at nesting depth 0
+  assigned to on: 3 17
+  used on: 17
+k
+  declared on line 8 at nesting depth 1
+  assigned to on: 12
+  used on: 13
+sum
+  declared on line 8 at nesting depth 1
+  assigned to on: 10 13
+  used on: 13 17
+compiling the C generated code
+executing the a.out
++++ dump on line 11 of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+      -12345   8   1 k
+           0   8   1 sum
+--- dump on line 11 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           1   8   1 k
+           1   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           2   8   1 k
+           3   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           3   8   1 k
+           6   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           4   8   1 k
+          10   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           5   8   1 k
+          15   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           6   8   1 k
+          21   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           7   8   1 k
+          28   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           8   8   1 k
+          36   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+           9   8   1 k
+          45   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           1   1   0 repeat
+           0   1   0 bigSum
+          10   8   1 k
+          55   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 11 of all levels begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+      -12345   8   1 k
+           0   8   1 sum
+--- dump on line 11 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+           1   8   1 k
+           1   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+           2   8   1 k
+           3   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+           3   8   1 k
+           6   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+           4   8   1 k
+          10   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+           5   8   1 k
+          15   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+           6   8   1 k
+          21   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+           7   8   1 k
+          28   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+           8   8   1 k
+          36   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+           9   8   1 k
+          45   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 14 of all levels begin +++
+           2   1   0 repeat
+          55   1   0 bigSum
+          10   8   1 k
+          55   8   1 sum
+--- dump on line 14 of all levels end ---
++++ dump on line 21 of all levels begin +++
+           3   1   0 repeat
+         110   1   0 bigSum
+--- dump on line 21 of all levels end ---

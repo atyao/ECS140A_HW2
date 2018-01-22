@@ -1,0 +1,6 @@
+running e2c t162
+warning: on line 2 break statement outside of loop ignored
+compiling the C generated code
+executing the a.out
+888
+999

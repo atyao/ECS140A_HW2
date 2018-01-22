@@ -1,0 +1,164 @@
+running e2c t196
+repeat
+  declared on line 1 at nesting depth 0
+  assigned to on: 5
+  never used
+bigSum
+  declared on line 1 at nesting depth 0
+  assigned to on: 3 25
+  used on: 25
+once
+  declared on line 1 at nesting depth 0
+  assigned to on: 9
+  never used
+g
+  declared on line 6 at nesting depth 1
+  assigned to on: 20
+  used on: 21
+sum
+  declared on line 6 at nesting depth 1
+  assigned to on: 7 21
+  used on: 21 25
+k
+  declared on line 10 at nesting depth 2
+  assigned to on: 14
+  used on: 15
+sum
+  declared on line 10 at nesting depth 2
+  assigned to on: 12 15
+  used on: 15
+compiling the C generated code
+executing the a.out
++++ dump on line 13 of level 2 begin +++
+      -12345  10   2 k
+           0  10   2 sum
+--- dump on line 13 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           1  10   2 k
+           1  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           2  10   2 k
+           3  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           3  10   2 k
+           6  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           4  10   2 k
+          10  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           5  10   2 k
+          15  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           6  10   2 k
+          21  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           7  10   2 k
+          28  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           8  10   2 k
+          36  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           9  10   2 k
+          45  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+          10  10   2 k
+          55  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 13 of level 2 begin +++
+      -12345  10   2 k
+           0  10   2 sum
+--- dump on line 13 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           1  10   2 k
+           1  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           2  10   2 k
+           3  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           3  10   2 k
+           6  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           4  10   2 k
+          10  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           5  10   2 k
+          15  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           6  10   2 k
+          21  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           7  10   2 k
+          28  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           8  10   2 k
+          36  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+           9  10   2 k
+          45  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 16 of level 2 begin +++
+          10  10   2 k
+          55  10   2 sum
+--- dump on line 16 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 22 of level 2 begin +++
+--- dump on line 22 of level 2 end ---
++++ dump on line 29 of all levels begin +++
+           3   1   0 repeat
+         110   1   0 bigSum
+           2   1   0 once
+--- dump on line 29 of all levels end ---

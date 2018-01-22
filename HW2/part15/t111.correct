@@ -1,0 +1,19 @@
+running e2c t111
+k
+  declared on line 1 at nesting depth 0
+  assigned to on: 2 6 25
+  used on: 2(2) 3 8(2) 29
+n
+  declared on line 1 at nesting depth 0
+  assigned to on: 5 8
+  used on: 8 12 23
+compiling the C generated code
+executing the a.out
+5
+1
+2
+4
+5
+4
+4
+116

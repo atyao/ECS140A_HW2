@@ -1,0 +1,6 @@
+running e2c t192
+warning: on line 1 dump statement level (99) exceeds block nesting level (0). using 0
+compiling the C generated code
+executing the a.out
++++ dump on line 1 of level 0 begin +++
+--- dump on line 1 of level 0 end ---
