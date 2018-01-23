@@ -54,7 +54,7 @@ public class Parser {
         gcprint("int esqrt(int x){ double y; if (x < 0) return 0; y = sqrt((double)x); return (int)y;}");
         gcprint("#include <stdio.h>");
         gcprint("bool isZero(int x){if(x == 0)return true; return false;}");
-        gcprint("int mod(int x, int y){if(isZero(y)){printf(\"mod(a,b) with b=0\"); exit(1);} return (((x % y) + y) % y);}");
+        gcprint("int mod(int x, int y){if(isZero(y)){printf(\"\\nmod(a,b) with b=0\\n\"); exit(1);} return (((x % y) + y) % y);}");
         gcprint("int main() {");
         block();
         gcprint("return 0; }");
@@ -273,15 +273,15 @@ public class Parser {
             scan();
         }
         else if( is(TK.MODULO) ) {
-            gcprint("mod(");
             scan();
+            mustbe(TK.LPAREN);
+            gcprint("mod(");
             expression();
+            mustbe(TK.COMMA);
+            gcprint(",");
             expression();
             mustbe(TK.RPAREN);
             gcprint(")");
-        }
-        else if( is(TK.COMMA) ) {
-            gcprint(",");
         }
         else
             parse_error("factor");
@@ -323,7 +323,7 @@ public class Parser {
 
     private void parse_error(String msg) {
         System.err.println( "can't parse: line "
-                            + tok.lineNumber + " " + msg );
+                            + tok.lineNumber + " " + msg);
         System.exit(1);
     }
 }
