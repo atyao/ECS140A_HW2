@@ -105,7 +105,8 @@ public class Scan {
 
                     case '/':
                         return ccase1or2('/','=',TK.DIVIDE,TK.NE);
-
+                    case '%':
+                        return ccase1or2('%','=',TK.MOD,TK.NE);
                     case '<':
                         return ccase1or2('<','=',TK.LT,TK.LE);
                     case '>':
