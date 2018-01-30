@@ -1,3 +1,5 @@
+import java.util.Stack;
+
 public class Parser {
 
     private Symtab symtab = new Symtab();
@@ -7,15 +9,20 @@ public class Parser {
     // when there is only a single token in the set,
     // we generally just compare tkrep with the first token.
     TK f_declarations[] = {TK.VAR, TK.none};
-    TK f_statement[] = {TK.ID, TK.PRINT, TK.IF, TK.DO, TK.FA, TK.SKIP, TK.STOP, TK.none};
+    TK f_statement[] = {TK.ID, TK.PRINT, TK.IF, TK.DO, TK.FA, TK.SKIP, TK.none};
     TK f_print[] = {TK.PRINT, TK.none};
     TK f_assignment[] = {TK.ID, TK.none};
     TK f_if[] = {TK.IF, TK.none};
     TK f_do[] = {TK.DO, TK.none};
     TK f_fa[] = {TK.FA, TK.none};
     TK f_skip[] = {TK.SKIP, TK.none};
-    TK f_stop[] = {TK.STOP, TK.none};
+    TK f_break[] = {TK.BREAK, TK.none};
     TK f_expression[] = {TK.ID, TK.NUM, TK.LPAREN, TK.none};
+    int nest = 0;
+    int nestChecked = 0;
+    int numNestedLoop = 0;
+
+    Stack<String> loopStack = new Stack<>();
 
     // tok is global to all these parsing methods;
     // scan just calls the scanner's scan method and saves the result in tok.
@@ -23,8 +30,6 @@ public class Parser {
     private void scan() {
         tok = scanner.scan();
     }
-    private boolean stopped = false;
-    private Integer lineCount = new Integer(0);
 
     private Scan scanner;
     Parser(Scan scanner) {
@@ -34,7 +39,6 @@ public class Parser {
         if( tok.kind != TK.EOF )
             parse_error("junk after logical end of program");
         symtab.reportVariables();
-
     }
 
     // print something in the generated code
@@ -52,10 +56,8 @@ public class Parser {
         gcprint("int esquare(int x){ return x*x;}");
         gcprint("#include <math.h>");
         gcprint("int esqrt(int x){ double y; if (x < 0) return 0; y = sqrt((double)x); return (int)y;}");
-        gcprint("#include <stdlib.h>");
+
         gcprint("#include <stdio.h>");
-        gcprint("int mod(int a, int b){ if(((a ^ b) < 0)) { int r = a % b; return r == 0 ? r : r + b;} return a - (a / b) * b;}");
-        gcprint("int checkZero(int x) { if(x == 0){ printf(\"\\n\"); printf(\"mod(a,b) with b=0\\n\"); exit(1);} return x;}");
         gcprint("int main() {");
 	block();
         gcprint("return 0; }");
@@ -104,23 +106,45 @@ public class Parser {
             fa();
         else if(first(f_skip))
             skip();
-        else if(first(f_stop))
-            stop();
+        else if(first(f_break))
+            breakProc();
         else
             parse_error("statement");
     }
-
-    private void stop(){
-        mustbe(TK.STOP);
-        gcprint("exit(0);");
-        if(first(f_statement))
-            System.err.println( "warning: on line "+ tok.lineNumber + " statement(s) follows stop statement");
-    }
-
     private void skip(){
         mustbe(TK.SKIP);
     }
-
+    private void breakProc(){
+        if (is(TK.BREAK)) {
+            if (numNestedLoop > 0) { //This means it's inside the FOR loop
+                scan(); //Scan next line
+                if (is(TK.NUM)) { // Optional Number
+                    int numBreak = Integer.parseInt(tok.string);
+                    if (numBreak == 0) {
+                        System.err.println("warning: on line " + tok.lineNumber + " statement(s) follows break statement");
+                    } else if (numBreak > numNestedLoop) {
+                        System.err.println("warning: on line " + tok.lineNumber + " break statement exceeding loop nesting ignored");
+                    } else if(numBreak == 1){
+                        gcprint("break;");
+                    }
+                    else {
+                        String jumpLabel = loopStack.peek();
+                        gcprint("goto " + jumpLabel + ";");
+                        statement_list();
+                    }
+                    scan();
+                } else if (!(is(TK.FA)) && !(is(TK.FI)) && !(is(TK.DO))) { //If it's neither then it's an expression so output warning
+                    System.err.println("warning: on line " + tok.lineNumber + " statement(s) follows break statement");
+                    statement_list();
+                } else {
+                    gcprint("break;");
+                }
+            } else if (numNestedLoop < 1) { //Outside loop so just output warning
+                System.err.println("warning: on line " + tok.lineNumber + " break statement outside of loop ignored");
+                scan();
+            }
+        }
+    }
     private void assignment(){
         String id = tok.string;
         int lno = tok.lineNumber; // save it too before mustbe!
@@ -145,17 +169,29 @@ public class Parser {
         guarded_commands(TK.IF);
         mustbe(TK.FI);
     }
+    private String addLabel(){
+        String label = "LOOP_" + tok.lineNumber;
+        loopStack.push(label);
+        return label + ":;";
+    }
 
-    private void doproc(){
+    private void doproc() {
         mustbe(TK.DO);
+        numNestedLoop++;
+        String label = addLabel();
         gcprint("while(1){");
         guarded_commands(TK.DO);
         gcprint("}");
         mustbe(TK.OD);
+        gcprint(label);
+        //if(!this.loopStack.empty()) this.loopStack.pop();
+        numNestedLoop--;
     }
 
     private void fa(){
         mustbe(TK.FA);
+        numNestedLoop++;
+        String label = addLabel();
         gcprint("for(");
         String id = tok.string;
         int lno = tok.lineNumber; // save it too before mustbe!
@@ -181,6 +217,8 @@ public class Parser {
         }
         commands();
         mustbe(TK.AF);
+        numNestedLoop--;
+        gcprint(label);
     }
 
     private void guarded_commands(TK which){
@@ -236,7 +274,7 @@ public class Parser {
 
     private void term(){
         factor();
-        while(  is(TK.TIMES) || is(TK.DIVIDE) || is(TK.MODULO)) {
+        while(  is(TK.TIMES) || is(TK.DIVIDE) ) {
             gcprint(tok.string);
             scan();
             factor();
@@ -272,32 +310,10 @@ public class Parser {
             gcprint(tok.string);
             scan();
         }
-        else if( is(TK.MOD)){
-            mod();
-        }
         else
             parse_error("factor");
     }
 
-    private void printCheckZero(String str){
-        gcprint(String.format("checkZero(%s)", str));
-    }
-
-    private void mod() {
-        scan();
-        mustbe(TK.LPAREN);
-        gcprint("mod(");
-        simple();
-        gcprint(",");
-        gcprint("checkZero(");
-        simple();
-        gcprint("))");
-        mustbe(TK.RPAREN);
-    }
-
-    private void validate_mod(){
-
-    }
     // be careful: use lno here, not tok.lineNumber
     // (which may have been advanced by now)
     private void referenced_id(String id, boolean assigned, int lno) {

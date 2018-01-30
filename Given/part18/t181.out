@@ -1,0 +1,21 @@
+javac -Xlint *.java
++++ dump of all levels begin +++
+      -12345   2   0 a
+      -12345   2   0 b
+      -12345   2   0 c
+--- dump of all levels end ---
++++ dump of all levels begin +++
+          10   5   0 a
+          20   5   0 b
+      -12345   5   0 c
+--- dump of all levels end ---
++++ dump of all levels begin +++
+          20   8   0 a
+          20   8   0 b
+          44   8   0 c
+--- dump of all levels end ---
++++ dump of all levels begin +++
+          20   9   0 a
+          20   9   0 b
+          44   9   0 c
+--- dump of all levels end ---

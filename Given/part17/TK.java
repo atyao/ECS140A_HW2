@@ -7,8 +7,6 @@ public enum TK {
     VAR,     // var
     RAV,     // rav
     PRINT,   // print
-    SKIP,    // skip
-    STOP,	 // stop
     IF,      // if
     FI,      // fi
     DO,      // do
@@ -18,10 +16,7 @@ public enum TK {
     AF,      // af
     TO,      // to
     ST,      // st
-    MODULO,  // mod
-    MAX,     // max
-    BREAK,   // break
-
+    BREAK, // break
     ASSIGN,   // :=
     LPAREN,   // (
     RPAREN,   // )
@@ -29,9 +24,7 @@ public enum TK {
     MINUS,    // -
     TIMES,    // *
     DIVIDE,   // /
-    REMAINDER,// %
-    COMMA,    // ,
-    DUMP, // dump
+    SKIP,   // skip
     SQUARE,   // ^
     SQRT,     // @
 

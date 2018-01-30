@@ -1,4 +1,5 @@
 import java.util.*;
+
 class Entry {
     private String name;        // name of symbol.
     private int linenumber;     // line on which declared
@@ -15,9 +16,6 @@ class Entry {
     String getName() {
         return name;
     }
-    int getLine() {return linenumber;}
-    int getLevel() {return level;}
-
     public void ref(boolean wasassigned, int linenumber) { // referenced
         ArrayList<AU> which;
         if (wasassigned) {

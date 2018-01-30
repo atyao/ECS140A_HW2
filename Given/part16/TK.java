@@ -19,9 +19,8 @@ public enum TK {
     TO,      // to
     ST,      // st
     MODULO,  // mod
-    MAX,     // max
-    BREAK,   // break
-
+    MAX,    // max
+    BREAK, // break
     ASSIGN,   // :=
     LPAREN,   // (
     RPAREN,   // )
@@ -31,7 +30,7 @@ public enum TK {
     DIVIDE,   // /
     REMAINDER,// %
     COMMA,    // ,
-    DUMP, // dump
+
     SQUARE,   // ^
     SQRT,     // @
 

@@ -7,15 +7,19 @@ public class Parser {
     // when there is only a single token in the set,
     // we generally just compare tkrep with the first token.
     TK f_declarations[] = {TK.VAR, TK.none};
-    TK f_statement[] = {TK.ID, TK.PRINT, TK.IF, TK.DO, TK.FA, TK.SKIP, TK.STOP, TK.none};
+    TK f_statement[] = {TK.ID, TK.PRINT, TK.SKIP,TK.STOP,TK.IF, TK.DO, TK.FA, TK.BREAK, TK.none};
     TK f_print[] = {TK.PRINT, TK.none};
+    TK f_skip[] = {TK.SKIP, TK.none};
+    TK f_stop[] = {TK.STOP, TK.none};
     TK f_assignment[] = {TK.ID, TK.none};
     TK f_if[] = {TK.IF, TK.none};
     TK f_do[] = {TK.DO, TK.none};
     TK f_fa[] = {TK.FA, TK.none};
-    TK f_skip[] = {TK.SKIP, TK.none};
-    TK f_stop[] = {TK.STOP, TK.none};
+    TK f_break[] = {TK.BREAK, TK.none};
     TK f_expression[] = {TK.ID, TK.NUM, TK.LPAREN, TK.none};
+    int nest = 0;
+    int nestChecked = 0;
+    Boolean isInLoop = false;
 
     // tok is global to all these parsing methods;
     // scan just calls the scanner's scan method and saves the result in tok.
@@ -23,8 +27,6 @@ public class Parser {
     private void scan() {
         tok = scanner.scan();
     }
-    private boolean stopped = false;
-    private Integer lineCount = new Integer(0);
 
     private Scan scanner;
     Parser(Scan scanner) {
@@ -34,7 +36,6 @@ public class Parser {
         if( tok.kind != TK.EOF )
             parse_error("junk after logical end of program");
         symtab.reportVariables();
-
     }
 
     // print something in the generated code
@@ -49,27 +50,32 @@ public class Parser {
 
     private void program() {
         // generate the E math functions:
-        gcprint("int esquare(int x){ return x*x;}");
         gcprint("#include <math.h>");
-        gcprint("int esqrt(int x){ double y; if (x < 0) return 0; y = sqrt((double)x); return (int)y;}");
         gcprint("#include <stdlib.h>");
         gcprint("#include <stdio.h>");
-        gcprint("int mod(int a, int b){ if(((a ^ b) < 0)) { int r = a % b; return r == 0 ? r : r + b;} return a - (a / b) * b;}");
-        gcprint("int checkZero(int x) { if(x == 0){ printf(\"\\n\"); printf(\"mod(a,b) with b=0\\n\"); exit(1);} return x;}");
+        gcprint("#include <stdbool.h>");
+        gcprint("#define max(x,y) (x)>(y)?(x):(y)");
+
+        gcprint("int esquare(int x){ return x*x;}");
+        gcprint("bool isZero(int x){if(x == 0)return true; return false;}");
+        gcprint("int mod(int x, int y){if(isZero(y)){printf(\"\\nmod(a,b) with b=0\\n\"); exit(1);} return (((x % y) + y) % y);}");
+        gcprint("int esqrt(int x){ double y; if (x < 0) return 0; y = sqrt((double)x); return (int)y;}");
+
+
         gcprint("int main() {");
-	block();
+        block();
         gcprint("return 0; }");
     }
 
     private void block() {
         symtab.begin_st_block();
-	gcprint("{");
+        gcprint("{");
         if( first(f_declarations) ) {
             declarations();
         }
         statement_list();
         symtab.end_st_block();
-	gcprint("}");
+        gcprint("}");
     }
 
     private void declarations() {
@@ -96,29 +102,26 @@ public class Parser {
             assignment();
         else if( first(f_print) )
             print();
+        else if( first(f_skip) )
+            skipproc();
+        else if( first(f_stop) )
+            stopproc();
         else if( first(f_if) )
             ifproc();
         else if( first(f_do) )
             doproc();
         else if( first(f_fa) )
             fa();
-        else if(first(f_skip))
-            skip();
-        else if(first(f_stop))
-            stop();
+        else if( first(f_break))
+            breakProc();
         else
             parse_error("statement");
     }
 
-    private void stop(){
-        mustbe(TK.STOP);
-        gcprint("exit(0);");
-        if(first(f_statement))
-            System.err.println( "warning: on line "+ tok.lineNumber + " statement(s) follows stop statement");
-    }
-
-    private void skip(){
-        mustbe(TK.SKIP);
+    private void breakProc(){
+        if(isInLoop == false)
+            System.err.println("warning: on line " + tok.lineNumber + " break statement outside of loop ignored\n");
+        mustbe(TK.BREAK);
     }
 
     private void assignment(){
@@ -131,6 +134,20 @@ public class Parser {
         gcprint("=");
         expression();
         gcprint(";");
+    }
+
+    private void skipproc(){
+        mustbe(TK.SKIP);
+    }
+
+    private void stopproc(){
+
+        mustbe(TK.STOP);
+        gcprint("exit(0);");
+        if ( first(f_statement)){
+            System.err.println("warning: on line "+ tok.lineNumber + " statement(s) follows stop statement" );
+        }
+
     }
 
     private void print(){
@@ -148,14 +165,17 @@ public class Parser {
 
     private void doproc(){
         mustbe(TK.DO);
+        isInLoop = true;
         gcprint("while(1){");
         guarded_commands(TK.DO);
         gcprint("}");
+        isInLoop = false;
         mustbe(TK.OD);
     }
 
     private void fa(){
         mustbe(TK.FA);
+        isInLoop = true;
         gcprint("for(");
         String id = tok.string;
         int lno = tok.lineNumber; // save it too before mustbe!
@@ -180,6 +200,7 @@ public class Parser {
             gcprint(")");
         }
         commands();
+        isInLoop = false;
         mustbe(TK.AF);
     }
 
@@ -216,7 +237,7 @@ public class Parser {
     private void expression(){
         simple();
         while( is(TK.EQ) || is(TK.LT) || is(TK.GT) ||
-               is(TK.NE) || is(TK.LE) || is(TK.GE)) {
+                is(TK.NE) || is(TK.LE) || is(TK.GE)) {
             if( is(TK.EQ) ) gcprint("==");
             else if( is(TK.NE) ) gcprint("!=");
             else gcprint(tok.string);
@@ -236,7 +257,7 @@ public class Parser {
 
     private void term(){
         factor();
-        while(  is(TK.TIMES) || is(TK.DIVIDE) || is(TK.MODULO)) {
+        while(  is(TK.TIMES) || is(TK.DIVIDE) || is (TK.REMAINDER)) {
             gcprint(tok.string);
             scan();
             factor();
@@ -257,8 +278,52 @@ public class Parser {
             expression();
             gcprint(")");
         }
+
+        else if( is(TK.MODULO)){ // mod(a,b) ==>
+            gcprint("mod(");
+            scan();
+            mustbe(TK.LPAREN);
+            expression();
+            mustbe(TK.COMMA);
+            gcprint(",");
+            expression();
+            mustbe(TK.RPAREN);
+            gcprint(")");
+
+        }
+        else if( is(TK.MAX)){
+            gcprint("max(");
+            scan();
+            if(is(TK.LPAREN)){
+                nest++;
+                //   System.out.println("nest" + nest);
+            }
+            mustbe(TK.LPAREN);
+
+            expression();
+            mustbe(TK.COMMA);
+            gcprint(",");
+
+            expression();
+            mustbe(TK.RPAREN);
+            if(is(TK.RPAREN)){
+                if(nest>5 && nestChecked == 0){
+                    System.err.println("can't parse: line "+ tok.lineNumber + " max expressions nested too deeply (> 5 deep)");
+                    System.exit(1);
+                }
+                nestChecked = 1;
+            }
+            gcprint(")");
+
+        }
         else if( is(TK.SQRT) ) {
             gcprint("esqrt(");
+            scan();
+            expression();
+            gcprint(")");
+        }
+        else if( is(TK.REMAINDER) ) {
+            gcprint("eRemainder(");
             scan();
             expression();
             gcprint(")");
@@ -272,39 +337,17 @@ public class Parser {
             gcprint(tok.string);
             scan();
         }
-        else if( is(TK.MOD)){
-            mod();
-        }
         else
             parse_error("factor");
     }
 
-    private void printCheckZero(String str){
-        gcprint(String.format("checkZero(%s)", str));
-    }
-
-    private void mod() {
-        scan();
-        mustbe(TK.LPAREN);
-        gcprint("mod(");
-        simple();
-        gcprint(",");
-        gcprint("checkZero(");
-        simple();
-        gcprint("))");
-        mustbe(TK.RPAREN);
-    }
-
-    private void validate_mod(){
-
-    }
     // be careful: use lno here, not tok.lineNumber
     // (which may have been advanced by now)
     private void referenced_id(String id, boolean assigned, int lno) {
         Entry e = symtab.search(id);
         if( e == null) {
             System.err.println("undeclared variable "+ id + " on line "
-                               + lno);
+                    + lno);
             System.exit(1);
         }
         e.ref(assigned, lno);
@@ -319,7 +362,7 @@ public class Parser {
     private void mustbe(TK tk) {
         if( ! is(tk) ) {
             System.err.println( "mustbe: want " + tk + ", got " +
-                                    tok);
+                    tok);
             parse_error( "missing token (mustbe)" );
         }
         scan();
@@ -334,7 +377,7 @@ public class Parser {
 
     private void parse_error(String msg) {
         System.err.println( "can't parse: line "
-                            + tok.lineNumber + " " + msg );
+                + tok.lineNumber + " " + msg );
         System.exit(1);
     }
 }
