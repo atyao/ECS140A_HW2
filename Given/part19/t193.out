@@ -1,0 +1,25 @@
+javac -Xlint *.java
++++ dump of all levels begin +++
+      -12345   1   0 k
+           0   1   0 sum
+--- dump of all levels end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
++++ dump on line 7 of level 1 begin +++
+--- dump on line 7 of level 1 end ---
