@@ -1,2 +1,0 @@
-# illegal
-mod := 10

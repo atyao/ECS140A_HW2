@@ -1,3 +1,0 @@
-running e2c t145
-mustbe: want RPAREN, got Token(COMMA , 8)
-can't parse: line 8 missing token (mustbe)
