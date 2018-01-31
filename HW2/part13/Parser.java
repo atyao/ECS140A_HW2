@@ -15,8 +15,7 @@ public class Parser {
     TK f_if[] = {TK.IF, TK.none};
     TK f_do[] = {TK.DO, TK.none};
     TK f_fa[] = {TK.FA, TK.none};
-    TK f_expression[] = {TK.ID, TK.NUM, TK.LPAREN, TK.MODULO, TK.none};
-    TK f_predef[] = {TK.MODULO, TK.none};
+    TK f_expression[] = {TK.ID, TK.NUM, TK.LPAREN, TK.none};
 
     // tok is global to all these parsing methods;
     // scan just calls the scanner's scan method and saves the result in tok.
@@ -49,26 +48,24 @@ public class Parser {
         // generate the E math functions:
         gcprint("int esquare(int x){ return x*x;}");
         gcprint("#include <math.h>");
-        gcprint("#include <stdlib.h>");
-        gcprint("#include <stdbool.h>");
+	      gcprint("#include <stdlib.h>");
         gcprint("int esqrt(int x){ double y; if (x < 0) return 0; y = sqrt((double)x); return (int)y;}");
+
         gcprint("#include <stdio.h>");
-        gcprint("bool isZero(int x){if(x == 0)return true; return false;}");
-        gcprint("int mod(int x, int y){if(isZero(y)){printf(\"\\nmod(a,b) with b=0\\n\"); exit(1);} return (((x % y) + y) % y);}");
         gcprint("int main() {");
-        block();
+	      block();
         gcprint("return 0; }");
     }
 
     private void block() {
         symtab.begin_st_block();
-	gcprint("{");
+	      gcprint("{");
         if( first(f_declarations) ) {
             declarations();
         }
         statement_list();
         symtab.end_st_block();
-	gcprint("}");
+	      gcprint("}");
     }
 
     private void declarations() {
@@ -95,10 +92,10 @@ public class Parser {
             assignment();
         else if( first(f_print) )
             print();
-	      else if ( first(f_skip) ) // Skip check
-	          skip();
-	      else if ( first(f_stop) ) // Stop check
-	          stop();
+      	else if ( first(f_skip) ) // Skip check
+      	    skip();
+      	else if ( first(f_stop) ) // Stop check
+      	    stop();
         else if( first(f_if) )
             ifproc();
         else if( first(f_do) )
@@ -133,11 +130,11 @@ public class Parser {
     } // Skip Function
 
     private void stop(){ // Stop Function
-	  mustbe(TK.STOP);
-	  gcprint("exit(0);");
-	  if( first(f_statement) ) // Checks for anything following stop
-	      System.err.println( "warning: on line " 
-		    + tok.lineNumber + " statement(s) follows stop statement");
+      	mustbe(TK.STOP);
+      	gcprint("exit(0);");
+      	if( first(f_statement) ) // Checks for anything following stop
+      	    System.err.println( "warning: on line " 
+      		+ tok.lineNumber + " statement(s) follows stop statement");
     } // Stop Function
 
     private void ifproc(){
@@ -272,17 +269,6 @@ public class Parser {
             gcprint(tok.string);
             scan();
         }
-        else if( is(TK.MODULO) ) { // MOD Function
-            scan();
-            mustbe(TK.LPAREN); // MOD is already read, check for '('
-            gcprint("mod(");
-            expression();
-            mustbe(TK.COMMA); // Checks for comma
-            gcprint(",");
-            expression();
-            mustbe(TK.RPAREN); // Encloses function
-            gcprint(")");
-        } // MOD Function
         else
             parse_error("factor");
     }
@@ -323,7 +309,7 @@ public class Parser {
 
     private void parse_error(String msg) {
         System.err.println( "can't parse: line "
-                            + tok.lineNumber + " " + msg);
+                            + tok.lineNumber + " " + msg );
         System.exit(1);
     }
 }
